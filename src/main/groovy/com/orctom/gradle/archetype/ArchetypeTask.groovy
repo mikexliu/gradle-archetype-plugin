@@ -73,6 +73,12 @@ class ArchetypeTask extends DefaultTask {
 
 
   static void extendedBinding(Map binding) {
+    String groupName = binding.get('group')
+    String normalizedGroupName = groupName.replaceAll('//', '/')
+    
+    binding.put('groupName', normalizedGroupName.replaceAll('\\W', '.'))
+    binding.put('groupPath', normalizedGroupName.replaceAll('\\W', File.separator))
+    
     String packageName = binding.get('group') + '/' + binding.get('name')
     String normalizedPackageName = packageName.replaceAll('//', '/')
 
